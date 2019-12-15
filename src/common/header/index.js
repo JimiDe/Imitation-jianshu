@@ -15,6 +15,14 @@ import {
 
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            focused: false
+        }
+        this.handleInputFocus = this.handleInputFocus.bind(this);
+        this.handleInputBlur = this.handleInputBlur.bind(this);
+    }
     render() {
         return(
             <Fragment>
@@ -31,9 +39,12 @@ class Header extends Component {
                                 <span className="iconfont iconDownload">&#xe608;</span>
                                 下载App
                             </NavItem>
-                            <SearchWraper>
-                                <NavSearch></NavSearch>
-                                <span className="iconfont">&#xe710;</span>
+                            <SearchWraper className={ this.state.focused ? 'focused':''}>
+                                <NavSearch className={ this.state.focused ? 'focused':''}
+                                           onFocus={ this.handleInputFocus }
+                                           onBlur={ this.handleInputBlur }
+                                />
+                                <span className={ this.state.focused ? 'iconfont focused':'iconfont'}>&#xe710;</span>
                             </SearchWraper>
                             <NavItem className='right login'>登录</NavItem>
                             <NavItem className='right beta'>
@@ -53,10 +64,19 @@ class Header extends Component {
                     </HeaderContent>
                 </HeaderWraper>
             </Fragment>
-            
-            
         )
     }
-}
+
+    handleInputFocus() {
+        this.setState({
+            focused: true
+        })
+    }
+    handleInputBlur() {
+        this.setState({
+            focused: false
+        })
+    }
+}    
 
 export default Header;

@@ -85,14 +85,24 @@ export const SearchWraper = styled.div`
     .iconfont{
         width: 30px;
         height: 30px;
-        // border: 1px solid #000;
-        // border-radius: 115px;
         position: absolute;
         right: 3px;
         top: 13px;
         text-align: center;
         line-height: 30px;
-    }
+        //选中搜索框后，iconfont样式设置
+        &.focused {
+            border: 1px solid #969696;
+            border-radius: 115px;
+            background: #969696;
+            right: -10px;
+            color: #fff;
+        };
+    };
+    //选中搜索框后，SearchWraper样式设置
+    &.focused {
+        width: 320px;
+    };
 `;
 
 export const NavSearch = styled.input.attrs({placeholder: '搜索'})`
@@ -112,7 +122,12 @@ export const NavSearch = styled.input.attrs({placeholder: '搜索'})`
     //属性样式设置
     &::placeholder {
         color: #969696;
-    }
+    };
+    //选中搜索框后，NavSearch样式设置
+    &.focused {
+        width: 320px;
+        color: #777;
+    };
 `;
 
 export const BetaImg = styled.div`
