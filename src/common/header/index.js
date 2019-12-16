@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { IconStyle } from '../../statics/iconfont/iconfont';
+import { CSSTransition } from 'react-transition-group';
 import { 
     HeaderWraper, 
     HeaderContent,
@@ -39,13 +40,32 @@ class Header extends Component {
                                 <span className="iconfont iconDownload">&#xe608;</span>
                                 下载App
                             </NavItem>
-                            <SearchWraper className={ this.state.focused ? 'focused':''}>
-                                <NavSearch className={ this.state.focused ? 'focused':''}
-                                           onFocus={ this.handleInputFocus }
-                                           onBlur={ this.handleInputBlur }
-                                />
-                                <span className={ this.state.focused ? 'iconfont focused':'iconfont'}>&#xe710;</span>
-                            </SearchWraper>
+                            <CSSTransition 
+                                in={ this.state.focused } 
+                                timeout={ 200 } 
+                                classNames="searchWraperSlide"
+                            >
+                                <SearchWraper className={ this.state.focused ? 'focused':''}>
+                                    <CSSTransition 
+                                        in={ this.state.focused } 
+                                        timeout={ 200 } 
+                                        classNames="NavSearchSlide" 
+                                    > 
+                                        <NavSearch  
+                                            className={ this.state.focused ? 'focused':''}
+                                            onFocus={ this.handleInputFocus } 
+                                            onBlur={ this.handleInputBlur }
+                                        />
+                                    </CSSTransition>
+                                    <CSSTransition 
+                                        in={ this.state.focused } 
+                                        timeout={ 200 } 
+                                        classNames="iconfontSlide" 
+                                    > 
+                                        <span className={ this.state.focused ? 'iconfont focused':'iconfont'}>&#xe710;</span>
+                                    </CSSTransition>
+                                </SearchWraper>
+                            </CSSTransition>   
                             <NavItem className='right login'>登录</NavItem>
                             <NavItem className='right beta'>
                                 <BetaImg/>
