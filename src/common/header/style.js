@@ -29,23 +29,6 @@ export const Nav = styled.div`
     width: 975px;
     height: 58px;
     margin: 0 auto;
-
-    //searchWraper入场动画
-    .searchWraperSlide-enter {
-        width: 255px;
-        transition: all .2s ease-out;
-    }
-    .searchWraperSlide-enter-active {
-        width: 320px;
-    }
-    //searchWraper出场动画
-    .searchWraperSlide-exit {
-        transition: all .2s ease-out;
-    }
-    .searchWraperSlide-exit-active {
-        width: 255px;
-    }
-   
 `;
 
 export const NavItem = styled.div`
@@ -110,28 +93,26 @@ export const SearchWraper = styled.div`
         line-height: 30px;
         //选中搜索框后，iconfont样式设置
         &.focused {
-            border: 1px solid #969696;
             border-radius: 115px;
             background: #969696;
             right: -10px;
             color: #fff;
         };
         //iconfont入场动画
-        .iconfontSlide-enter {
-            transition: all .2s ease-out;
+        &.iconfontSlide-enter {
+            transition: all 0.1s ease-in;
         }
-        .iconfontSlide-enter-active {
-            border: 1px solid #969696;
+        &.iconfontSlide-enter-active {
+            color: #fff;
             border-radius: 115px;
             background: #969696;
             right: -10px;
-            color: #fff;
         }
         //iconfont出场动画
-        .iconfontSlide-exit {
-            transition: all .2s ease-out;
+        &.iconfontSlide-exit {
+            transition: all 0.1s ease-in;
         }
-        .iconfontSlide-exit-active {
+        &.iconfontSlide-exit-active {
             border: none;
             right: 3px;
         }
@@ -140,21 +121,21 @@ export const SearchWraper = styled.div`
     &.focused {
         width: 320px;
     };
-    
-    //NavSearch入场动画
-    .NavSearchSlide-enter {
-        width: 240px;
-        transition: all .2s ease-out;
+
+    //searchWraper入场动画
+    &.searchWraperSlide-enter {
+        width: 255px;
+        transition: all 0.3s ease-out;
     }
-    .NavSearchSlide-enter-active {
+    &.searchWraperSlide-enter-active {
         width: 320px;
     }
-    //NavSearch出场动画
-    .NavSearchSlide-exit {
-        transition: all .2s ease-out;
+    //searchWraper出场动画
+    &.searchWraperSlide-exit {
+        transition: all 0.3s ease-out;
     }
-    .NavSearchSlide-exit-active {
-        width: 240px;
+    &.searchWraperSlide-exit-active {
+        width: 255px;
     }
     
 `;
@@ -182,6 +163,21 @@ export const NavSearch = styled.input.attrs({placeholder: '搜索'})`
         width: 320px;
         color: #777;
     };
+    //NavSearch入场动画
+    &.NavSearchSlide-enter {
+        width: 240px;
+        transition: all 0.3s ease-out;
+    }
+    &.NavSearchSlide-enter-active {
+        width: 320px;
+    }
+    //NavSearch出场动画
+    &.NavSearchSlide-exit {
+        transition: all 0.3s ease-out;
+    }
+    &.NavSearchSlide-exit-active {
+        width: 240px;
+    }
 
 `;
 
