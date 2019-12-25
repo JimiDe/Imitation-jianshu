@@ -86,7 +86,7 @@ const mapStateToProps = (state) => {
         // focused: state.header.get("focused")  //使用了conbineReducers和immutable，没有使用redux-immutable时的写法。
 
         // focused: state.get("header").get("focused")  //使用了combineReducers、immutable和redux-immutable时的写法。
-        focused: state.gitIn(["header", "focused"]) // 和上行效果一致，只是换了个api。
+        focused: state.getIn(["header", "focused"]) // 和上行效果一致，只是换了个api。
 
     }
 }
