@@ -13,6 +13,7 @@
     "react-scripts": "3.3.0",
     "react-transition-group": "^4.3.0",
     "redux": "^4.0.4",
+    "redux-immutable": "^4.0.0",
     "styled-components": "^5.0.0-rc.2"
   },
   "scripts": {
