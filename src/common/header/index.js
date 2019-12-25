@@ -9,7 +9,13 @@ import {
     Logo,
     Nav,
     NavItem,
+    SeachArea,
     SearchWraper,
+    SearchInfo,
+    SearchInfoTitle,
+    SearchInfoSwitch,
+    SearchInfoList,
+    SearchInfoItem,
     NavSearch,
     BetaImg,
     Addtion,
@@ -33,32 +39,50 @@ const Header = (props) => {
                             <span className="iconfont iconDownload">&#xe608;</span>
                             下载App
                         </NavItem>
-                        <CSSTransition 
-                            in={ props.focused } 
-                            timeout={ 300 } 
-                            classNames="searchWraperSlide"
-                        >
-                            <SearchWraper className={ props.focused ? 'focused':''}>
-                                <CSSTransition 
-                                    in={ props.focused } 
-                                    timeout={ 300 } 
-                                    classNames="NavSearchSlide" 
-                                > 
-                                    <NavSearch  
-                                        className={ props.focused ? 'focused':''}
-                                        onFocus={ props.handleInputFocus } 
-                                        onBlur={ props.handleInputBlur }
-                                    />
-                                </CSSTransition>
-                                <CSSTransition 
-                                    in={ props.focused } 
-                                    timeout={ 100 } 
-                                    classNames="iconfontSlide" 
-                                > 
-                                    <span className={ props.focused ? 'iconfont focused':'iconfont'}>&#xe710;</span>
-                                </CSSTransition>
-                            </SearchWraper>
-                        </CSSTransition>   
+                        <SeachArea>
+                            <CSSTransition 
+                                in={ props.focused } 
+                                timeout={ 300 } 
+                                classNames="searchWraperSlide"
+                            >
+                                <SearchWraper className={ props.focused ? 'focused':''}>
+                                    <CSSTransition 
+                                        in={ props.focused } 
+                                        timeout={ 300 } 
+                                        classNames="NavSearchSlide" 
+                                    > 
+                                        <NavSearch  
+                                            className={ props.focused ? 'focused':''}
+                                            onFocus={ props.handleInputFocus } 
+                                            onBlur={ props.handleInputBlur }
+                                        />
+                                    </CSSTransition>
+                                    <CSSTransition 
+                                        in={ props.focused } 
+                                        timeout={ 100 } 
+                                        classNames="iconfontSlide" 
+                                    > 
+                                        <span className={ props.focused ? 'iconfont focused':'iconfont'}>&#xe710;</span>
+                                    </CSSTransition>
+                                </SearchWraper>
+                            </CSSTransition> 
+                            <SearchInfo className={props.focused ? '' : 'unfocused'}>
+                                <SearchInfoTitle>
+                                    热门搜索
+                                    <SearchInfoSwitch>换一批</SearchInfoSwitch>
+                                </SearchInfoTitle>
+                                <SearchInfoList>
+                                    <SearchInfoItem>教育</SearchInfoItem>
+                                    <SearchInfoItem>文化</SearchInfoItem>
+                                    <SearchInfoItem>影视</SearchInfoItem>
+                                    <SearchInfoItem>互联网</SearchInfoItem>
+                                    <SearchInfoItem>情感</SearchInfoItem>
+                                    <SearchInfoItem>搞笑</SearchInfoItem>
+                                    <SearchInfoItem>诗集</SearchInfoItem>
+                                    <SearchInfoItem>小说</SearchInfoItem>
+                                </SearchInfoList>
+                            </SearchInfo> 
+                        </SeachArea> 
                         <NavItem className='right login'>登录</NavItem>
                         <NavItem className='right beta'>
                             <BetaImg/>
