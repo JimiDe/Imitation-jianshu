@@ -57,6 +57,7 @@ const Header = (props) => {
                                             onBlur={ props.handleInputBlur }
                                         />
                                     </CSSTransition>
+
                                     <CSSTransition 
                                         in={ props.focused } 
                                         timeout={ 100 } 
@@ -72,14 +73,13 @@ const Header = (props) => {
                                     <SearchInfoSwitch>换一批</SearchInfoSwitch>
                                 </SearchInfoTitle>
                                 <SearchInfoList>
-                                    <SearchInfoItem>教育</SearchInfoItem>
-                                    <SearchInfoItem>文化</SearchInfoItem>
-                                    <SearchInfoItem>影视</SearchInfoItem>
-                                    <SearchInfoItem>互联网</SearchInfoItem>
-                                    <SearchInfoItem>情感</SearchInfoItem>
-                                    <SearchInfoItem>搞笑</SearchInfoItem>
-                                    <SearchInfoItem>诗集</SearchInfoItem>
-                                    <SearchInfoItem>小说</SearchInfoItem>
+                                    {
+                                        props.list.map((item) => {
+                                            return(
+                                                <SearchInfoItem key={item}>{ item }</SearchInfoItem>
+                                            )
+                                        })
+                                    }
                                 </SearchInfoList>
                             </SearchInfo> 
                         </SeachArea> 
@@ -110,7 +110,8 @@ const mapStateToProps = (state) => {
         // focused: state.header.get("focused")  //使用了conbineReducers和immutable，没有使用redux-immutable时的写法。
 
         // focused: state.get("header").get("focused")  //使用了combineReducers、immutable和redux-immutable时的写法。
-        focused: state.getIn(["header", "focused"]) // 和上行效果一致，只是换了个api。
+        focused: state.getIn(["header", "focused"]), // 和上行效果一致，只是换了个api。
+        list: state.getIn(["header", "list"]) 
 
     }
 }
@@ -119,6 +120,7 @@ const mapDispatchToProps = (dispatch) => {
     return{
         handleInputFocus() {
             dispatch(actionCreactors.searchFocus());
+            dispatch(actionCreactors.getSeachInfoList());
         },
         handleInputBlur() {
             dispatch(actionCreactors.searchBlur());
