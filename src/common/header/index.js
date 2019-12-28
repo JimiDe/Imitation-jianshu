@@ -24,6 +24,8 @@ import {
 
 
 const Header = (props) => {
+    // 结构赋值，简化代码
+    const { focused, handleInputFocus, handleInputBlur, list } = props;
     return(
         <Fragment>
             <IconStyle />
@@ -41,40 +43,40 @@ const Header = (props) => {
                         </NavItem>
                         <SeachArea>
                             <CSSTransition 
-                                in={ props.focused } 
+                                in={ focused } 
                                 timeout={ 300 } 
                                 classNames="searchWraperSlide"
                             >
-                                <SearchWraper className={ props.focused ? 'focused':''}>
+                                <SearchWraper className={ focused ? 'focused':''}>
                                     <CSSTransition 
-                                        in={ props.focused } 
+                                        in={ focused } 
                                         timeout={ 300 } 
                                         classNames="NavSearchSlide" 
                                     > 
                                         <NavSearch  
-                                            className={ props.focused ? 'focused':''}
-                                            onFocus={ props.handleInputFocus } 
-                                            onBlur={ props.handleInputBlur }
+                                            className={ focused ? 'focused':''}
+                                            onFocus={ handleInputFocus } 
+                                            onBlur={ handleInputBlur }
                                         />
                                     </CSSTransition>
 
                                     <CSSTransition 
-                                        in={ props.focused } 
+                                        in={ focused } 
                                         timeout={ 100 } 
                                         classNames="iconfontSlide" 
                                     > 
-                                        <span className={ props.focused ? 'iconfont focused':'iconfont'}>&#xe710;</span>
+                                        <span className={ focused ? 'iconfont focused':'iconfont'}>&#xe710;</span>
                                     </CSSTransition>
                                 </SearchWraper>
                             </CSSTransition> 
-                            <SearchInfo className={props.focused ? '' : 'unfocused'}>
+                            <SearchInfo className={focused ? '' : 'unfocused'}>
                                 <SearchInfoTitle>
                                     热门搜索
                                     <SearchInfoSwitch>换一批</SearchInfoSwitch>
                                 </SearchInfoTitle>
                                 <SearchInfoList>
                                     {
-                                        props.list.map((item) => {
+                                        list.map((item) => {
                                             return(
                                                 <SearchInfoItem key={item}>{ item }</SearchInfoItem>
                                             )
