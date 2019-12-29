@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const getSearchList = (data) => ({
     type: actionTypes.CHANGE_SEARCH_LIST,
-    data: data,
+    data,
     totalPage: Math.ceil(data.length/10)   //向上取整，返回大于或等于一个给定数字的最小整数
 })
 

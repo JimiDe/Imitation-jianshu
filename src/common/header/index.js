@@ -33,13 +33,23 @@ class Header extends Component {
         const pageList = [];
         // 在进行循环前进行判断，有数据才进行循环，否则在页面初始化（list无数据）时就会进行循环，会报list的key值问题。
         if(newList.length){
-            for(let i=(page-1)*10; i<page*10 ; i++){
-                pageList.push(
-                    // immutable类型的数组，无法使用list[i],需要使用toJS()，将一个Immutable数据转换为JS类型的数据。
-                    // <SearchInfoItem key={list[i]}>{ list[i] }</SearchInfoItem>
-                    <SearchInfoItem key={newList[i]}>{ newList[i] }</SearchInfoItem>
-                ) 
+            // 避免报list的key值问题。比如热门搜索为25条时，26-29时会报错。
+            if(page < totalPage){
+                for(let i=(page-1)*10; i<page*10; i++){
+                    pageList.push(
+                        // immutable类型的数组，无法使用list[i],需要使用toJS()，将一个Immutable数据转换为JS类型的数据。
+                        // <SearchInfoItem key={list[i]}>{ list[i] }</SearchInfoItem>
+                        <SearchInfoItem key={newList[i]}>{ newList[i] }</SearchInfoItem>
+                    ) 
+                }
+            }else{
+                for(let i=(page-1)*10; i<newList.length; i++){
+                    pageList.push(
+                        <SearchInfoItem key={newList[i]}>{ newList[i] }</SearchInfoItem>
+                    ) 
+                }
             }
+            
         }
         
         if(focused || mouseEnter){
@@ -136,11 +146,18 @@ const mapStateToProps = (state) => {
         // focused: state.header.get("focused")  //使用了conbineReducers和immutable，没有使用redux-immutable时的写法。
 
         // focused: state.get("header").get("focused")  //使用了combineReducers、immutable和redux-immutable时的写法。
-        focused: state.getIn(["header", "focused"]), // 和上行效果一致，只是换了个api。
-        list: state.getIn(["header", "list"]), 
-        mouseEnter: state.getIn(["header", "mouseEnter"]) ,
-        page: state.getIn(["header", "page"]) ,
-        totalPage: state.getIn(["header", "totalPage"]) 
+        
+        // focused: state.getIn(["header", "focused"]), // 和上行效果一致，只是换了个api。
+        // list: state.getIn(["header", "list"]), 
+        // mouseEnter: state.getIn(["header", "mouseEnter"]) ,
+        // page: state.getIn(["header", "page"]) ,
+        // totalPage: state.getIn(["header", "totalPage"]) ,
+
+        focused: state.header.get("focused") ,
+        list: state.header.get("list"), 
+        mouseEnter: state.header.get("mouseEnter") ,
+        page: state.header.get("page") ,
+        totalPage: state.header.get("totalPage") ,
     }
 }
 

@@ -12,7 +12,10 @@ const defaultState = fromJS({
 export default (state=defaultState, action) => {
     switch(action.type){
         case actionTypes.SEARCH_FOCUS:
-            return state.set("focused", true)
+            return state.merge({
+                focused: true,
+                page: 1
+            })
         case actionTypes.SEARCH_BLUR:
             return state.set("focused", false)
         case actionTypes.CHANGE_SEARCH_LIST:
