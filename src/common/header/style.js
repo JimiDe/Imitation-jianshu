@@ -170,6 +170,7 @@ export const SearchInfoTitle = styled.div`
 export const SearchInfoSwitch = styled.span`
     font-size: 13px;
     float: right;
+    cursor: pointer;
     .spin {
         font-size: 10px;
         margin-right: 3px;

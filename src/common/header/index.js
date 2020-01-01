@@ -79,7 +79,7 @@ class Header extends Component {
     }
     render(){
         // 结构赋值， 简化代码
-        const { focused, handleInputFocus, handleInputBlur } = this.props;
+        const { focused, list, handleInputFocus, handleInputBlur } = this.props;
         return(
             <Fragment>
                 <IconStyle />
@@ -109,7 +109,7 @@ class Header extends Component {
                                         > 
                                             <NavSearch  
                                                 className={ focused ? 'focused':''}
-                                                onFocus={ handleInputFocus } 
+                                                onFocus={ () => {handleInputFocus(list)} } 
                                                 onBlur={ handleInputBlur }
                                             />
                                         </CSSTransition>
@@ -170,9 +170,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        handleInputFocus() {
+        handleInputFocus(list) {
+            if(list.size === 0) {
+                dispatch(actionCreactors.getSeachInfoList());
+            }
             dispatch(actionCreactors.searchFocus());
-            dispatch(actionCreactors.getSeachInfoList());
+
         },
         handleInputBlur() {
             dispatch(actionCreactors.searchBlur());
