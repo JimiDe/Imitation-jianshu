@@ -170,6 +170,14 @@ export const SearchInfoTitle = styled.div`
 export const SearchInfoSwitch = styled.span`
     font-size: 13px;
     float: right;
+    .spin {
+        font-size: 10px;
+        margin-right: 3px;
+        display: inline-block;   // transform只能转换具有display:block的元素
+        transition: all 0.2s;  // 动画过渡，让其具有过渡特性
+        transform-origin: center center; //指定旋转原点
+        
+    }
 `;
 
 export const SearchInfoList = styled.div`

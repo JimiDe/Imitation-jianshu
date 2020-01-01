@@ -59,7 +59,14 @@ class Header extends Component {
                 >
                     <SearchInfoTitle>
                         热门搜索
-                        <SearchInfoSwitch onClick={ () => {handleChangePage(page, totalPage)} }>换一批</SearchInfoSwitch>
+                        <SearchInfoSwitch onClick={ () => {handleChangePage(page, totalPage, this.spinIcon)} }>
+                            <span className="iconfont spin"
+                                  ref={(icon) => {this.spinIcon = icon}}
+                                // 在 React 中，可以直接设置 style 属性来控制样式，不过与 HTML 不同的是， 传入的 style 值为一个对象， 对象的所有 key 都是驼峰式命名
+                                  style={{transform: "rotate(0deg)"}} 
+                            >&#xe7e9;</span>
+                            换一批
+                        </SearchInfoSwitch>
                     </SearchInfoTitle>
                     <SearchInfoList>
                         { pageList }
@@ -176,7 +183,11 @@ const mapDispatchToProps = (dispatch) => {
         handleMouseLeave() {
             dispatch(actionCreactors.searchAreaMouseLeave());
         },
-        handleChangePage(page, totalPage) {
+        handleChangePage(page, totalPage, icon) {
+            var iconDeg = icon.style.transform;  //获取行内样式
+            var deg = iconDeg.match(/[0-9]+/g);  //匹配样式中的角度数值
+            var degNum = parseInt(deg, 10);  //将字符串转为数字
+            icon.style.transform = "rotate(" + (degNum+360) + "deg)"; //设置旋转角度
             if(page < totalPage){
                 dispatch(actionCreactors.changePage(page+1));
             }else{
