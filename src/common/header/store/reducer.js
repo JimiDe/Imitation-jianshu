@@ -12,19 +12,13 @@ const defaultState = fromJS({
 export default (state=defaultState, action) => {
     switch(action.type){
         case actionTypes.SEARCH_FOCUS:
-            return state.merge({
-                focused: true,
-                page: 1
-            })
+            return state.set("focused", true).set("page", 1) 
         case actionTypes.SEARCH_BLUR:
             return state.set("focused", false)
         case actionTypes.CHANGE_SEARCH_LIST:
             // return state.set("list", fromJS(action.data)).set("totalPage", action.totalPage)
             // 多次set，可使用api：merge()
-            return state.merge({
-                list: fromJS(action.data),
-                totalPage: action.totalPage
-            })
+            return state.set("list", fromJS(action.data)).set("totalPage", action.totalPage) 
         case actionTypes.SEARCH_AREA_MOUSE_ENTER:
             return state.set("mouseEnter", true)
         case actionTypes.SEARCH_AREA_MOUSE_LEAVE:

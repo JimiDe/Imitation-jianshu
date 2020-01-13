@@ -20,6 +20,20 @@
       "unicode_decimal": 58916
     },
     {
+      "icon_id": "1397994",
+      "name": "Left",
+      "font_class": "Left",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "1397995",
+      "name": "Right",
+      "font_class": "Right",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
       "icon_id": "1621077",
       "name": "Aa",
       "font_class": "Aa",
