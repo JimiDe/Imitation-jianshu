@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 class Recommend extends Component {
     render(){
-        const { recommend } = this.props;
+        const { recommendList } = this.props;
         return(
             <RecommendWraper>
                 {
-                    recommend.map((item) => {
+                    recommendList.map((item) => {
                         return(
                             <a href='/' key={ item.get('id') }>
                                 <img src={ item.get('imgUrl') } alt=''/>
@@ -23,6 +23,6 @@ class Recommend extends Component {
 }
 
 const mapState = (state) => ({
-    recommend: state.home.get('recommend')
+    recommendList: state.home.get('recommendList')
 })
 export default connect(mapState, null)(Recommend);

@@ -4,50 +4,55 @@ import * as actionCreators from './../store/actionCreators';
 
 class Carousel extends Component {
     render(){
-        const { image, offset, picIndex, isPlaying, getprevPic, getNextPic, handleBtnClick, handleMouseEnter, handleMouseLeave } = this.props;
-        return(
-            <div className='carousel'
-                 onMouseEnter = { () => { handleMouseEnter() } }
-                 onMouseLeave = { () => { handleMouseLeave(offset, image, picIndex, isPlaying, getNextPic) } }
-                 onChange = { () => { getNextPic(offset, image, picIndex) } }
-            >
-                <div className='imgContent' ref='imgContent' style={{ width: 625*(image.size+2), left:offset+'px' }}>
-                    <img key={image.last().get('id')} src={image.last().get('pic')} alt={image.last().get('title')}/> 
-                    {
-                        image.map((item) => {
-                            return (
-                                <img key={item.get('id')} src={item.get('pic')} alt={item.get('title')}/> 
-                            )
-                        })
-                    } 
-                    <img key={image.first().get('id')} src={image.first().get('pic')} alt={image.first().get('title')}/> 
+        const { imageList, offset, picIndex, isPlaying, getprevPic, getNextPic, handleBtnClick, handleMouseEnter, handleMouseLeave } = this.props;
+        if(imageList.size){
+            return(
+                <div className='carousel'
+                    onMouseEnter = { () => { handleMouseEnter() } }
+                    onMouseLeave = { () => { handleMouseLeave(offset, imageList, picIndex, isPlaying, getNextPic) } }
+                    onChange = { () => { getNextPic(offset, imageList, picIndex) } }
+                >
+                    <div className='imgContent' ref='imgContent' style={{ width: 625*(imageList.size+2), left:offset+'px' }}>
+                        <img key={imageList.last().get('id')} src={imageList.last().get('pic')} alt={imageList.last().get('title')}/> 
+                        {
+                            imageList.map((item) => {
+                                return (
+                                    <img key={item.get('id')} src={item.get('pic')} alt={item.get('title')}/> 
+                                )
+                            })
+                        } 
+                        <img key={imageList.first().get('id')} src={imageList.first().get('pic')} alt={imageList.first().get('title')}/> 
+                    </div>
+                    <div className='arrowsWraper wraperLeft' onClick={ () => {getprevPic(offset, imageList, picIndex, isPlaying)} }>
+                        <span className="iconfont">&#xe611;</span>
+                    </div>
+                    <div className='arrowsWraper wraperRight' onClick={ () => {getNextPic(offset, imageList, picIndex, isPlaying)} }>
+                        <span className="iconfont">&#xe612;</span>
+                    </div>
+                    <ol className='bottom_btn'>
+                        {
+                            imageList.map((item,index) => {
+                                return (
+                                    <li key={index} className={ picIndex === index ? 'wheel whellOn':'wheel'} onClick={ () =>{ handleBtnClick(picIndex, index, offset, imageList) }}></li>
+                                )
+                            })
+                        } 
+                    </ol>
                 </div>
-                <div className='arrowsWraper wraperLeft' onClick={ () => {getprevPic(offset, image, picIndex, isPlaying)} }>
-                    <span className="iconfont">&#xe611;</span>
-                </div>
-                <div className='arrowsWraper wraperRight' onClick={ () => {getNextPic(offset, image, picIndex, isPlaying)} }>
-                    <span className="iconfont">&#xe612;</span>
-                </div>
-                <ol className='bottom_btn'>
-                    {
-                        image.map((item,index) => {
-                            return (
-                                <li key={index} className={ picIndex === index ? 'wheel whellOn':'wheel'} onClick={ () =>{ handleBtnClick(picIndex, index, offset, image) }}></li>
-                            )
-                        })
-                    } 
-                </ol>
-            </div>
-        )
+            )
+        }else{
+            return null
+        }
+        
     }
     componentDidMount() { 
-        const { image, offset, picIndex, isPlaying, getNextPic, handleMouseLeave } = this.props;
-        handleMouseLeave(offset, image, picIndex, isPlaying, getNextPic);
+        const { imageList, offset, picIndex, isPlaying, getNextPic, handleMouseLeave } = this.props;
+        handleMouseLeave(offset, imageList, picIndex, isPlaying, getNextPic);
     }
 }
 
 const mapStateToProps = (state) => ({
-    image: state.home.get('image'),
+    imageList: state.home.get('imageList'),
     offset: state.home.get('offset'),
     picIndex: state.home.get('picIndex'),
     isPlaying: state.home.get('isPlaying'),
@@ -57,7 +62,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         // 缓慢轮播上一张图片，底部按钮点亮随之变动。
         // 频繁点击无效。
-        getprevPic(offset, image, picIndex, isPlaying) {
+        getprevPic(offset, imageList, picIndex, isPlaying) {
             if(isPlaying){
                 isPlaying = false;
                 dispatch(actionCreators.playingChange(isPlaying));
@@ -75,7 +80,7 @@ const mapDispatchToProps = (dispatch) => {
                                 dispatch(actionCreators.getNext(newOffset, picIndex));
                                 if(newOffset === 0){
                                     setTimeout(function(){
-                                        dispatch(actionCreators.getNext(-625*(image.size), image.size-1));
+                                        dispatch(actionCreators.getNext(-625*(imageList.size), imageList.size-1));
                                     },200);
                                 }
                                 animate(newOffset);
@@ -96,11 +101,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         // 缓慢轮播下一张图片，底部按钮点亮随之变动。
          // 频繁点击无效。
-        getNextPic(offset, image, picIndex, isPlaying) {
+        getNextPic(offset, imageList, picIndex, isPlaying) {
             if(isPlaying){
                 isPlaying = false;
                 dispatch(actionCreators.playingChange(isPlaying));
-                if(offset > -625*(image.size+1)){
+                if(offset > -625*(imageList.size+1)){
                     picIndex +=1;
                     //缓慢滚动
                     var time = 300;  //动画总时长
@@ -111,7 +116,7 @@ const mapDispatchToProps = (dispatch) => {
                         if(newOffset >= offset - 625){
                             setTimeout(function(){
                                 dispatch(actionCreators.getNext(newOffset, picIndex));
-                                if(newOffset === -625*(image.size+1)){
+                                if(newOffset === -625*(imageList.size+1)){
                                     setTimeout(function(){
                                         dispatch(actionCreators.getNext(-625, 0));
                                     },200);
@@ -133,7 +138,7 @@ const mapDispatchToProps = (dispatch) => {
         },
        
         // 点击底部按钮选择图片时，轮播图缓慢移动且按钮点亮随之变动。
-        handleBtnClick(picIndex, index, offset, image){
+        handleBtnClick(picIndex, index, offset, imageList){
             // 优化：点击当前按钮，不执行。
             if(index !== picIndex){
                 // index: 点击时的index
@@ -158,7 +163,7 @@ const mapDispatchToProps = (dispatch) => {
                         if(newOffset >= allOffset){
                             setTimeout(function(){
                                 dispatch(actionCreators.getNext(newOffset, index));
-                                if(newOffset === -625*(image.size+1)){
+                                if(newOffset === -625*(imageList.size+1)){
                                     setTimeout(function(){
                                         dispatch(actionCreators.getNext(-625, 0));
                                     },200);
@@ -181,7 +186,7 @@ const mapDispatchToProps = (dispatch) => {
                                 dispatch(actionCreators.getNext(newOffset, index));
                                 if(newOffset === 0){
                                     setTimeout(function(){
-                                        dispatch(actionCreators.getNext(-625*(image.size), 0));
+                                        dispatch(actionCreators.getNext(-625*(imageList.size), 0));
                                     },200);
                                 }
                                 animate(newOffset);
@@ -200,11 +205,11 @@ const mapDispatchToProps = (dispatch) => {
             clearInterval(timer);
         },
         //鼠标移出轮播图区域，自动播放开始。
-        handleMouseLeave(offset, image, picIndex, isPlaying, getNextPic){
+        handleMouseLeave(offset, imageList, picIndex, isPlaying, getNextPic){
             timer = setInterval(function(){
-                getNextPic(offset, image, picIndex, isPlaying);
+                getNextPic(offset, imageList, picIndex, isPlaying);
                 offset -= 625;
-                if(offset === -625*(image.size+1)){
+                if(offset === -625*(imageList.size+1)){
                     offset = -625;
                 } 
                 if(picIndex + 1 === 3){

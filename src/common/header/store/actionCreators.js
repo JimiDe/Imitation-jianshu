@@ -29,8 +29,8 @@ export const getSeachInfoList = () => {
         axios.get('api/searchInfoList.json').then((res) => {
             const data = res.data;
             dispatch(getSearchList(data.data));
-        }).catch(() => {
-            console.log("error");
+        }).catch((e) => {
+            console.log("error" + e);
         })    
     }
 }

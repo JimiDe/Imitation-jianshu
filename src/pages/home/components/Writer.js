@@ -5,11 +5,11 @@ import * as actionCreators from '../store/actionCreators';
 
 class Writer extends Component {
     getWriterInfo() {
-        const { writerData, writerPage } = this.props; 
-        const newData = writerData.toJS();
-        const AllPage = Math.ceil(writerData.size/5);
+        const { writerList, writerPage } = this.props; 
+        const newData = writerList.toJS();
+        const AllPage = Math.ceil(writerList.size/5);
         const pageList = [];
-        if(writerData.size){
+        if(writerList.size){
             if(writerPage < AllPage){
                 getEveryPageInfo(writerPage*5);
                 return(
@@ -18,7 +18,7 @@ class Writer extends Component {
                     </WriterInfo>
                 )
             }else{
-                getEveryPageInfo(writerData.size);
+                getEveryPageInfo(writerList.size);
                 return(
                     <WriterInfo>
                         { pageList }
@@ -54,12 +54,12 @@ class Writer extends Component {
         }
     }
     render(){
-        const { writerData, writerPage, handleWriterChange } = this.props; 
+        const { writerList, writerPage, handleWriterChange } = this.props; 
         return(
             <WriterWraper>
                 <WriterTitle>
                     推荐作者
-                    <WriterSwitch onClick={ () => { handleWriterChange(writerData, writerPage, this.spinIcon) }}>
+                    <WriterSwitch onClick={ () => { handleWriterChange(writerList, writerPage, this.spinIcon) }}>
                         <span className='iconfont'
                               ref={ (icon) => { this.spinIcon = icon } }
                               style={{ transform: "rotate(0deg)" }}
@@ -75,21 +75,14 @@ class Writer extends Component {
             </WriterWraper>
         )
     }
-    UNSAFE_componentWillMount() {
-        const { getWriterData } = this.props; 
-        getWriterData();
-    }
 }
 
 const mapState = (state) => ({
-    writerData: state.home.get('writerData'),
+    writerList: state.home.get('writerList'),
     writerPage: state.home.get('writerPage')
 })
 const mapDispatch = (dispatch) => {
     return {
-        getWriterData() {
-            dispatch(actionCreators.getRecommendWriter());
-        },
         handleWriterChange(allData, page, icon) {
             var iconDeg = icon.style.transform;
             var degStr = iconDeg.match(/[0-9]+/g);

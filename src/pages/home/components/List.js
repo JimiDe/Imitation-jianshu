@@ -5,11 +5,11 @@ import * as actionCreators from '../store/actionCreators'
 
 class List extends Component {
     render(){
-        const { articleListData, haveMore, everyMoreShow, moreCount, getMoreArticle } = this.props; 
+        const { articleList, haveMore, everyMoreShow, moreCount, getMoreArticle } = this.props; 
         return(
             <div>
                 {
-                    articleListData.map((item, index) => {
+                    articleList.map((item, index) => {
                         if(index < everyMoreShow*moreCount){
                             return(
                                 <ArticleItem key={ item.get('id') }>
@@ -45,7 +45,7 @@ class List extends Component {
                         
                     })
                 }
-                <More onClick={ () => {getMoreArticle(moreCount, everyMoreShow, articleListData, haveMore)} }>
+                <More onClick={ () => {getMoreArticle(moreCount, everyMoreShow, articleList, haveMore)} }>
                     <div className={haveMore? 'have':'noHave'}>{haveMore? '阅读更多':'已无更多'}</div>
                 </More>
             </div>
@@ -55,7 +55,7 @@ class List extends Component {
 }
 
 const mapState = (state) => ({
-    articleListData: state.home.get('articleListData'),
+    articleList: state.home.get('articleList'),
     haveMore: state.home.get('haveMore'),
     everyMoreShow: state.home.get('everyMoreShow'),
     moreCount: state.home.get('moreCount'),

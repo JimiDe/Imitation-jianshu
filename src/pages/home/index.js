@@ -8,6 +8,8 @@ import {
     HomeLeft,
     HomeRight
 } from './style';
+import { connect } from 'react-redux';
+import { actionCreators } from './store';
 
 class Home extends Component {
     render(){
@@ -26,6 +28,16 @@ class Home extends Component {
             </Fragment>
         )
     }
+    componentDidMount(){
+        this.props.getHomeAllInfo();
+    }
 }
 
-export default Home;
+const mapDispatch = (dispatch) => {
+    return {
+        getHomeAllInfo() {
+            dispatch(actionCreators.getHomeInfo());
+        }
+    }
+}
+export default connect(null, mapDispatch)(Home);
