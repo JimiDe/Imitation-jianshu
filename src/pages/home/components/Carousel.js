@@ -43,8 +43,6 @@ class Carousel extends Component {
     componentDidMount() { 
         const { image, offset, picIndex, isPlaying, getNextPic, handleMouseLeave } = this.props;
         handleMouseLeave(offset, image, picIndex, isPlaying, getNextPic);
-        
-
     }
 }
 

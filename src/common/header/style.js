@@ -6,6 +6,9 @@ export const HeaderWraper = styled.div`
     width: 100%;
     height: 56px;
     border-bottom: 1px solid #f0f0f0;
+    position: fixed;
+    background-color: #fff;
+    z-index: 1000;
 `;
 
 export const HeaderContent = styled.div`
@@ -155,9 +158,7 @@ export const SearchInfo = styled.div`
     width: 240px;
     padding: 0 20px;
     box-shadow: 0 0 8px rgba(0, 0 , 0 , 0.2);
-    // &.unfocused {
-    //     display: none;
-    // }
+    background-color: #FBFBFB;
 `;
 
 export const SearchInfoTitle = styled.div`
@@ -177,7 +178,6 @@ export const SearchInfoSwitch = styled.span`
         display: inline-block;   // transform只能转换具有display:block的元素
         transition: all 0.2s;  // 动画过渡，让其具有过渡特性
         transform-origin: center center; //指定旋转原点
-        
     }
 `;
 

@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Carousel from './components/Carousel';
-import Topic from './components/Topic';
 import List from './components/List';
 import Recommend from './components/Recommend';
 import Writer from './components/Writer';
@@ -13,11 +12,10 @@ import {
 class Home extends Component {
     render(){
         return(
-            <div>
+            <Fragment>
                 <HomeWraper>
                     <HomeLeft>
                         <Carousel />
-                        <Topic />
                         <List />
                     </HomeLeft>
                     <HomeRight>
@@ -25,7 +23,7 @@ class Home extends Component {
                         <Writer />
                     </HomeRight>
                 </HomeWraper>
-            </div>
+            </Fragment>
         )
     }
 }

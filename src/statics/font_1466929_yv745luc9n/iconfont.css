@@ -1,13 +1,10 @@
-import { createGlobalStyle } from 'styled-components';
-
-export const IconStyle = createGlobalStyle`
-  @font-face {font-family: "iconfont";
-  src: url('./iconfont.eot?t=1579444912154'); /* IE9 */
-  src: url('./iconfont.eot?t=1579444912154#iefix') format('embedded-opentype'), /* IE6-IE8 */
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1579444912154'); /* IE9 */
+  src: url('iconfont.eot?t=1579444912154#iefix') format('embedded-opentype'), /* IE6-IE8 */
   url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2'),
-  url('./iconfont.woff?t=1579444912154') format('woff'),
-  url('./iconfont.ttf?t=1579444912154') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-  url('./iconfont.svg?t=1579444912154#iconfont') format('svg'); /* iOS 4.1- */
+  url('iconfont.woff?t=1579444912154') format('woff'),
+  url('iconfont.ttf?t=1579444912154') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1579444912154#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -18,4 +15,51 @@ export const IconStyle = createGlobalStyle`
   -moz-osx-font-smoothing: grayscale;
 }
 
-`
+.iconspinner9:before {
+  content: "\e7e9";
+}
+
+.iconiconset0137:before {
+  content: "\e624";
+}
+
+.iconxinheart118:before {
+  content: "\e755";
+}
+
+.iconpinglun2:before {
+  content: "\e684";
+}
+
+.icondiamond:before {
+  content: "\e63d";
+}
+
+.iconLeft:before {
+  content: "\e611";
+}
+
+.iconRight:before {
+  content: "\e612";
+}
+
+.iconAa:before {
+  content: "\e636";
+}
+
+.iconsousuo:before {
+  content: "\e710";
+}
+
+.iconzhinanzhenfaxiandaohangdizhiweizhi:before {
+  content: "\e786";
+}
+
+.iconshoujixiazai:before {
+  content: "\e608";
+}
+
+.iconjia:before {
+  content: "\e711";
+}
+
