@@ -6,12 +6,23 @@ import Writer from './components/Writer';
 import {
     HomeWraper,
     HomeLeft,
-    HomeRight
+    HomeRight,
+    BackTop
 } from './style';
 import { connect } from 'react-redux';
 import { actionCreators } from './store';
 
 class Home extends Component {
+    handleScrollTop() {
+        // 瞬间滚动（默认）
+        window.scrollTo(0, 0);
+        //平滑滚动
+        // window.scrollTo({
+        //     left: 0,
+        //     top: 0,
+        //     behavior: 'smooth'
+        // });
+    }
     render(){
         return(
             <Fragment>
@@ -24,20 +35,40 @@ class Home extends Component {
                         <Recommend />
                         <Writer />
                     </HomeRight>
+                    { this.props.scrollShow ?  <BackTop onClick={ this.handleScrollTop.bind(this) }>顶部</BackTop> : null }
                 </HomeWraper>
             </Fragment>
         )
     }
-    componentDidMount(){
+    componentDidMount() {
         this.props.getHomeAllInfo();
+        this.bindEvents();
+    }
+    bindEvents() {
+        window.addEventListener('scroll', this.props.changeScrollShow);
+    }
+    // 组件销毁时，将全局的事件绑定移除，这样就不会影响其他组件了。
+    componentWillUnmont() {
+        window.removeEventListener('scroll', this.props.changeScrollShow);
     }
 }
 
+const mapState = (state) => ({
+    scrollShow: state.home.get('scrollShow')
+})
 const mapDispatch = (dispatch) => {
     return {
         getHomeAllInfo() {
             dispatch(actionCreators.getHomeInfo());
+        },
+        changeScrollShow() {
+            if(document.documentElement.scrollTop > 200){
+                dispatch(actionCreators.setScrollShow(true));
+            }else{
+                dispatch(actionCreators.setScrollShow(false));
+            }
+            
         }
     }
 }
-export default connect(null, mapDispatch)(Home);
+export default connect(mapState, mapDispatch)(Home);

@@ -5,7 +5,8 @@ export const HomeWraper = styled.div`
     position: absolute;
     top: 60px;
     left: 50%;
-    transform: translateX(-480px);
+    // transform: translateX(-480px);  // 会导致子元素的position：fixed失效
+    margin-left: -480px;
     z-index: 100;
 `;
 
@@ -101,24 +102,9 @@ export const ArticleItem = styled.div`
     border-bottom: 1px solid #d1d1d1;
     min-height: 140px;
     overflow: hidden;
-    .img {
-        width: 125px;
-        height: 100px;
-        float: right;
-        cursor: pointer;
-    }
-    .noImg {
-        display: none;
-    }
 `;
 export const ListInfo = styled.div`
-    float: left;
-    .ListInfoHasImg {
-        width: 500px; 
-    }
-    .ListInfoNoImg {
-        width: 625px; 
-    }
+    width: 625px;
     .title {
         font-size: 18px;
         font-weight: bold;
@@ -156,27 +142,22 @@ export const ListInfo = styled.div`
             height: 18px;
             margin-right: 1px;
         }
+        .beta {
+            color: #ea6f5a;
+        }
     }
 `;
 export const More = styled.div`
-    div {
-        width: 625px;
-        height: 40px;
-        line-height: 40px;
-        border-radius: 20px;
-        margin: 30px auto 60px;
-        text-align: center;
-        font-size: 15px;
-        color: #fff;
-    }
-    .have{
-        background-color: #EA6F5A;
-        cursor: pointer;
-    }
-    .noHave {
-        background-color: #a5a5a5;
-        cursor: default;
-    }
+    width: 625px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    margin: 30px auto 60px;
+    text-align: center;
+    font-size: 15px;
+    color: #fff;
+    background-color: #EA6F5A;
+    cursor: pointer;
     
 `;
 
@@ -290,4 +271,17 @@ export const MoreWriter = styled.div`
         font-size: 10px;
     }
 `;
+
+export const BackTop = styled.div`
+    position: fixed;
+    right: 50px;
+    bottom: 40px;
+    font-size: 14px;
+    width: 45px;
+    height: 30px;
+    border: 1px solid #ccc;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+`
 
