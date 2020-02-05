@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import Carousel from './components/Carousel';
 import List from './components/List';
 import Recommend from './components/Recommend';
@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import { actionCreators } from './store';
 
-class Home extends Component {
+class Home extends PureComponent {
     handleScrollTop() {
         // 瞬间滚动（默认）
         window.scrollTo(0, 0);

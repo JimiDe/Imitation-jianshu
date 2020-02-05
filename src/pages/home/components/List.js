@@ -1,41 +1,43 @@
-import React, { Component } from 'react';
-import { ArticleItem, ListInfo, More } from '../style';
+import React, { PureComponent } from 'react';
+import { Article, ArticleItem, ListInfo, More } from '../style';
 import { connect } from 'react-redux';
 import * as actionCreators from '../store/actionCreators'
+import { Link } from 'react-router-dom';
 
-class List extends Component {
+class List extends PureComponent {
     render(){
         const { articleList, getMoreArticle, articlePage } = this.props; 
         return(
-            <div>
+            <Article>
                 {
                     articleList.map((item, index) => {
                         return(
                             <ArticleItem key={ index }>
                                 <ListInfo>
-                                    <div>
+                                    <Link to='/detail' style={{textDecoration: 'none'}}>
                                         <div className='title'>{ item.get('title') }</div>
-                                        <div className='desc'>{ item.get('desc') }</div>
-                                        <div className='status'>
-                                            <div className='beta'>
-                                                <span className='iconfont'>&#xe63d;</span>
-                                                { item.get('beta') }
-                                            </div>
-                                            <a href='xxx'>
-                                                { item.get('author') }
-                                            </a>
-                                            <a href='xxx'>
-                                                <span className='iconfont'>&#xe684;</span>
-                                                { item.get('comment') }
-                                            </a>
-                                            <div>
-                                                <span className='iconfont'>&#xe755;</span>
-                                                { item.get('like') }
-                                            </div>
+                                    </Link> 
+                                    <div className='desc'>{ item.get('desc') }</div>
+                                    <div className='status'>
+                                        <div className='beta'>
+                                            <span className='iconfont'>&#xe63d;</span>
+                                            { item.get('beta') }
+                                        </div>
+                                        <div>
+                                            { item.get('author') }
+                                        </div>
+                                        <div>
+                                            <span className='iconfont'>&#xe684;</span>
+                                            { item.get('comment') }
+                                        </div>
+                                        <div>
+                                            <span className='iconfont'>&#xe755;</span>
+                                            { item.get('like') }
                                         </div>
                                     </div>
                                 </ListInfo>
                             </ArticleItem>
+                            
                         )  
                         
                     })
@@ -43,7 +45,7 @@ class List extends Component {
                 <More onClick={ () => { getMoreArticle(articlePage) }}>
                     阅读更多
                 </More>
-            </div>
+            </Article>
             
         )
     }

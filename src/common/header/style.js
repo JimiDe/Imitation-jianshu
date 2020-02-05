@@ -16,7 +16,7 @@ export const HeaderContent = styled.div`
     position: relative;
 `;
 
-export const Logo = styled.a.attrs({href: '/'})`
+export const Logo = styled.div`
     display: block;
     width: 100px;
     height: 56px;

@@ -1,8 +1,9 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import { IconStyle } from '../../statics/iconfont/iconfont';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { actionCreactors } from './store';
+import { Link } from 'react-router-dom';
 import { 
     HeaderWraper, 
     HeaderContent,
@@ -24,7 +25,7 @@ import {
 
 
 
-class Header extends Component {
+class Header extends PureComponent {
 
     getSearchArea() {
         // 结构赋值， 简化代码
@@ -85,7 +86,10 @@ class Header extends Component {
                 <IconStyle />
                 <HeaderWraper>
                     <HeaderContent>
-                        <Logo />
+                        <Link to='/'>
+                            <Logo />
+                        </Link>
+                        
                         <Nav>
                             <NavItem className='left active home'>
                                 <span className="iconfont iconHome">&#xe786;</span>

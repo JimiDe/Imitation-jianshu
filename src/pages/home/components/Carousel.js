@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from './../store/actionCreators';
 
-class Carousel extends Component {
+class Carousel extends PureComponent {
     render(){
         const { imageList, offset, picIndex, isPlaying, getprevPic, getNextPic, handleBtnClick, handleMouseEnter, handleMouseLeave } = this.props;
         if(imageList.size){

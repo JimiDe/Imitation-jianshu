@@ -93,6 +93,11 @@ export const HomeLeft = styled.div`
             
         }
     }  
+`; 
+export const Article = styled.div`
+    Link {
+        text-decoration: none;
+    }
 `;
 
 export const ArticleItem = styled.div`
@@ -110,7 +115,7 @@ export const ListInfo = styled.div`
         font-weight: bold;
         color: #333;
         cursor: pointer;
-        lin-height: 27px
+        line-height: 27px;
         margin: 7px 0 4px;
     }
     .desc {

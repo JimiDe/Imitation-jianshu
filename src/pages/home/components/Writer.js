@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { WriterWraper, WriterTitle, WriterSwitch, WriterInfo,  MoreWriter, WriterItem, ProfilePhoto, WriterDesc, Attention, WriterData } from '../style';
 import { connect } from 'react-redux'; 
 import * as actionCreators from '../store/actionCreators';
 
-class Writer extends Component {
+class Writer extends PureComponent {
     getWriterInfo() {
         const { writerList, writerPage } = this.props; 
         const newData = writerList.toJS();
