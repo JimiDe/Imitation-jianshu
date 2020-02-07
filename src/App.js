@@ -6,6 +6,7 @@ import store from './store/index';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Home from './pages/home';
 import Detail from './pages/detail';
+import Login from './pages/login';
  
 class App extends Component {
   render() {
@@ -20,7 +21,8 @@ class App extends Component {
             {/*exact，这表明path需要完全匹配 */}
             <Header />
             <Route path='/' exact component={ Home }></Route>
-            <Route path='/detail' component={ Detail }></Route>
+            <Route path='/detail/:id' component={ Detail }></Route>
+            <Route path='/login' component={ Login }></Route>
           </BrowserRouter>
         </Provider>
       </Fragment>

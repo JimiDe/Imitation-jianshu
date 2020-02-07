@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { actionCreactors } from './store';
 import { Link } from 'react-router-dom';
+import { actionCreators as loginActionCreators } from '../../pages/login/store/index'
 import { 
     HeaderWraper, 
     HeaderContent,
@@ -80,7 +81,7 @@ class Header extends PureComponent {
     }
     render(){
         // 结构赋值， 简化代码
-        const { focused, list, handleInputFocus, handleInputBlur } = this.props;
+        const { focused, list, handleInputFocus, handleInputBlur, login, logout } = this.props;
         return(
             <Fragment>
                 <IconStyle />
@@ -129,7 +130,13 @@ class Header extends PureComponent {
                                 </CSSTransition> 
                                 { this.getSearchArea() }
                             </SeachArea> 
-                            <NavItem className='right login'>登录</NavItem>
+                            { login ? <Link to='/'>
+                                        <NavItem className='right login' onClick={ logout }>退出</NavItem>
+                                      </Link> : <Link to='/login'>
+                                                    <NavItem className='right login'>登录</NavItem>
+                                                </Link>
+                            }
+                            
                             <NavItem className='right beta'>
                                 <BetaImg/>
                             </NavItem>
@@ -145,7 +152,7 @@ class Header extends PureComponent {
                             </Button>
                         </Addtion>
                     </HeaderContent>
-                </HeaderWraper>
+                </HeaderWraper> 
             </Fragment>
         )
     }
@@ -169,6 +176,7 @@ const mapStateToProps = (state) => {
         mouseEnter: state.header.get("mouseEnter") ,
         page: state.header.get("page") ,
         totalPage: state.header.get("totalPage") ,
+        login: state.login.get("login") 
     }
 }
 
@@ -200,6 +208,9 @@ const mapDispatchToProps = (dispatch) => {
             }else{
                 dispatch(actionCreactors.changePage(1));
             }
+        },
+        logout() {
+            dispatch(loginActionCreators.logout());
         }
     }
 }

@@ -14,7 +14,8 @@ class List extends PureComponent {
                         return(
                             <ArticleItem key={ index }>
                                 <ListInfo>
-                                    <Link to='/detail' style={{textDecoration: 'none'}}>
+                                    {/* <Link to='/detail' style={{textDecoration: 'none'}}> */}
+                                    <Link to={'/detail/' + item.get('id')} style={{textDecoration: 'none'}}>
                                         <div className='title'>{ item.get('title') }</div>
                                     </Link> 
                                     <div className='desc'>{ item.get('desc') }</div>
