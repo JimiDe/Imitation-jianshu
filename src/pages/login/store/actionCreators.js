@@ -17,6 +17,8 @@ export const login = (account, password) => {
         axios.get('api/login.json?account=' + account + "&password=" + password).then((res) => {
             if(res.data.data){
                 dispatch(logintAction());
+            }else{
+                console.log('登陆失败')
             }
         }).catch((e) => {
             console.log(e);
